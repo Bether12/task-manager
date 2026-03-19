@@ -1,8 +1,8 @@
-from model import task
 from gui import app
-from datetime import datetime
 
 def main():
-    pass
+    application = app.TaskManager()
+    application.root.mainloop()
 
-main()
+if __name__ == "__main__":
+    main()
