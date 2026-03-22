@@ -14,6 +14,7 @@ class Task:
         task.type = data.get("type", "")
         task.date_created = data.get("date_created", "")
         task.date_updated = data.get("date_updated", "")
+        return task
 
     def to_dict(self):
         return {

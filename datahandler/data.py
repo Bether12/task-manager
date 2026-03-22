@@ -19,6 +19,7 @@ class Data:
     
     def add_task(self, name: str, priority: int):
         self.task_list.append(task.Task(name, priority))
+        self.save_data()
 
     def delete_task(self, index):
         self.task_list.pop(index)
