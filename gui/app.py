@@ -27,11 +27,12 @@ class TaskManager:
 
         tk.Button(self.root, text="Add Task", command=self.add_task, bg="#4CAF50", fg="white", font=("Arial", 10, "bold")).pack(pady=10)
 
-        self.tree = ttk.Treeview(self.root, columns=("name", "status", "priority", "date"), show="headings")
+        self.tree = ttk.Treeview(self.root, columns=("name", "status", "priority", "date_created", "date_updated"), show="headings")
         self.tree.heading("name", text="Task name")
         self.tree.heading("priority", text="Priority level")
         self.tree.heading("status", text="Status")
-        self.tree.heading("date", text="Date created")
+        self.tree.heading("date_created", text="Date created")
+        self.tree.heading("date_updated", text="Date updated")
         self.tree.pack(pady=5)
 
         self.btn_frame = tk.Frame(self.root)
@@ -76,7 +77,7 @@ class TaskManager:
         for id in self.tree.get_children():
             self.tree.delete(id)
         for task in self.tasks.task_list:
-            self.tree.insert("", "end", values=(task.name, task.priority, task.type, task.date_created))
+            self.tree.insert("", "end", values=(task.name, task.priority, task.type, task.date_created, task.date_updated))
 
     def on_closing(self):
         self.tasks.save_data()
