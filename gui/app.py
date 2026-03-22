@@ -12,6 +12,7 @@ class TaskManager:
         self.tasks = data.Data()
 
         self.set_widgets()
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def set_widgets(self):
         tk.Label(self.root, text="New Task:", font=("Arial", 12)).pack(pady=8)
@@ -69,3 +70,7 @@ class TaskManager:
         self.listbox.delete(0, tk.END)
         for task in self.tasks.task_list:
             self.listbox.insert(tk.END, f"{task.name}   {task.type}   {str(task.priority)}   {task.date_created}")
+
+    def on_closing(self):
+        self.tasks.save_data()
+        self.root.destroy()
