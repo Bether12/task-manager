@@ -28,4 +28,7 @@ class Data:
     def mark_done(self, index):
         self.task_list[index].type = "done"
         self.save_data()
+
+    def export_csv(): #TODO
+        pass
                 

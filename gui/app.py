@@ -15,6 +15,20 @@ class TaskManager:
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def set_widgets(self):
+        self.menubar = tk.Menu(self.root)
+        self.root.configure(menu=self.menubar)
+
+        self.menu_file = tk.Menu(self.menubar, tearoff=0)
+        self.menu_file.add_command(label="Export to CSV") #TODO
+        self.menu_file.add_separator()
+        self.menu_file.add_command(label="Exit", command=self.on_closing)
+
+        self.menu_help = tk.Menu(self.menubar, tearoff=0)
+        self.menu_help.add_command(label="Github page") #TODO
+
+        self.menubar.add_cascade(label="File", menu=self.menu_file)
+        self.menubar.add_cascade(label="Help", menu=self.menu_help)
+
         tk.Label(self.root, text="New Task:", font=("Arial", 12)).pack(pady=8)
         
         self.entry = tk.Entry(self.root, width=55, font=("Arial", 11))
