@@ -1,12 +1,14 @@
 from datetime import datetime
 
 class Task:
-    def __init__(self, name : str, priority: int):
+    def __init__(self, name : str, priority: int, type: str = "todo",
+                 date_created =datetime.now().strftime("%d/%m/%Y %H:%M"),
+                 date_updated = datetime.now().strftime("%d/%m/%Y %H:%M")):
         self.name = name
-        self.type = "todo"
+        self.type = type
         self.priority = priority
-        self.date_created = datetime.now().strftime("%d/%m/%Y %H:%M")
-        self.date_updated = datetime.now().strftime("%d/%m/%Y %H:%M")
+        self.date_created = date_created
+        self.date_updated = date_updated
 
     @classmethod
     def from_dict(cls, data):

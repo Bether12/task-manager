@@ -22,7 +22,9 @@ class TaskManager:
         self.root.configure(menu=self.menubar)
 
         self.menu_file = tk.Menu(self.menubar, tearoff=0)
-        self.menu_file.add_command(label="Export to CSV", command=self.export_csv) #TODO
+        self.menu_file.add_command(label="Import from CSV", command=self.import_csv)
+        self.menu_file.add_separator()
+        self.menu_file.add_command(label="Export to CSV", command=self.export_csv)
         self.menu_file.add_separator()
         self.menu_file.add_command(label="Exit", command=self.on_closing)
 
@@ -106,6 +108,16 @@ class TaskManager:
             self.refresh_tree()
         except IndexError:
             messagebox.showwarning("Warning", "Select a task")
+
+    def import_csv(self):
+        file = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV Files", "*.csv")], title="Import tasks from CSV")
+        result = self.tasks.import_csv(file)
+
+        if result == 0:
+            messagebox.showinfo("Success", "CSV information imported correctly")
+            self.refresh_tree()
+        else:
+            messagebox.showerror("Error", f"File not imported:\n{str(result)}")
     
     def export_csv(self):
         file = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV Files", "*.csv")], title="Save tasks as CSV")
