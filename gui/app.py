@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from tkinter import filedialog
 from datahandler import data
 
 class TaskManager:
@@ -21,7 +22,7 @@ class TaskManager:
         self.root.configure(menu=self.menubar)
 
         self.menu_file = tk.Menu(self.menubar, tearoff=0)
-        self.menu_file.add_command(label="Export to CSV") #TODO
+        self.menu_file.add_command(label="Export to CSV", command=self.export_csv) #TODO
         self.menu_file.add_separator()
         self.menu_file.add_command(label="Exit", command=self.on_closing)
 
@@ -106,6 +107,15 @@ class TaskManager:
         except IndexError:
             messagebox.showwarning("Warning", "Select a task")
     
+    def export_csv(self):
+        file = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV Files", "*.csv")], title="Save tasks as CSV")
+        result = self.tasks.export_csv(file)
+
+        if result == 0:
+            messagebox.showinfo("Success", "File saved correctly")
+        else:
+            messagebox.showerror("Error", f"File not saved:\n{str(result)}")
+
     def refresh_tree(self):
         for id in self.tree.get_children():
             self.tree.delete(id)

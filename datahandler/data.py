@@ -1,6 +1,7 @@
 from model import task
 import os
 import json
+import csv
 
 class Data:
     def __init__(self):
@@ -29,6 +30,20 @@ class Data:
         self.task_list[index].type = "done"
         self.save_data()
 
-    def export_csv(): #TODO
-        pass
+    def export_csv(self, file):
+        if not file:
+            return
+
+        try:
+            with open(file, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+
+                writer.writerow(["Priority", "Task Name", "Date Created", "Date Updated", "Status"])
+
+                for task in self.task_list:
+                    writer.writerow([task.priority, task.name, task.date_created, task.date_updated, task.type])
+            return 0
+
+        except Exception as e:
+            return e
                 
