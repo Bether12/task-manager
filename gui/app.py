@@ -7,7 +7,7 @@ class TaskManager:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Task Manager")
-        self.root.geometry("800x600")
+        self.root.geometry("800x400")
         self.root.resizable(False, False)
 
         self.tasks = data.Data()
@@ -34,7 +34,7 @@ class TaskManager:
 
         # Table view
 
-        self.tree = ttk.Treeview(self.root, columns=("name", "status", "priority", "date_created", "date_updated"), show="headings")
+        self.tree = ttk.Treeview(self.root, columns=("priority", "name", "status", "date_created", "date_updated"), show="headings")
         self.tree.heading("name", text="Task name")
         self.tree.heading("priority", text="Priority level")
         self.tree.heading("status", text="Status")
@@ -120,7 +120,7 @@ class TaskManager:
         for id in self.tree.get_children():
             self.tree.delete(id)
         for task in self.tasks.task_list:
-            self.tree.insert("", "end", values=(task.name, task.priority, task.type, task.date_created, task.date_updated))
+            self.tree.insert("", "end", values=(task.priority, task.name, task.type, task.date_created, task.date_updated))
 
     def on_closing(self):
         self.tasks.save_data()
