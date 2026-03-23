@@ -42,12 +42,24 @@ class TaskManager:
         self.tree.heading("status", text="Status")
         self.tree.heading("date_created", text="Date created")
         self.tree.heading("date_updated", text="Date updated")
-        self.tree.pack(pady=5)
+
+        yscroll = ttk.Scrollbar(self.root, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=yscroll.set)
+
+        xscroll = ttk.Scrollbar(self.root, orient="horizontal", command=self.tree.xview)
+        self.tree.configure(xscrollcommand=xscroll.set)
+
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        yscroll.grid(row=0, column=1, sticky="ns")
+        xscroll.grid(row=1, column=0, sticky="ew")
+
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
 
         # Button frame
 
         self.btn_frame = tk.Frame(self.root)
-        self.btn_frame.pack(pady=15)
+        self.btn_frame.grid(row=2, column=0, pady=15)
         tk.Button(self.btn_frame, text="Add Task", command=self.open_dialog, bg="#4CAF50", fg="white").grid(row=0, column=0, padx=10)
         tk.Button(self.btn_frame, text="Mark as done", command=self.mark_done, bg="#2196F3", fg="white").grid(row=0, column=1, padx=10)
         tk.Button(self.btn_frame, text="Delete Task", command=self.delete_task, bg="#f44336", fg="white").grid(row=0, column=2, padx=10)
