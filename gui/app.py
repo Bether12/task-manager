@@ -91,8 +91,7 @@ class TaskManager:
     def mark_done(self):
         try:
             #Selects the selected item id, splits it and access the relevant number part, then subtracts 1 to be compatible with zeroth indexes
-            index = int(self.tree.selection()[0].split('I')[1]) - 1
-            print(index)
+            index = self.tree.index(self.tree.selection())
             self.tasks.mark_done(index)
             self.refresh_tree()
         except IndexError:
@@ -101,7 +100,7 @@ class TaskManager:
     def delete_task(self):
         try:
             #Selects the selected item id, splits it and access the relevant number part, then subtracts 1 to be compatible with zeroth indexes
-            index = int(self.tree.selection()[0].split('I')[1]) - 1 
+            index = self.tree.index(self.tree.selection())
             self.tasks.delete_task(index)
             self.refresh_tree()
         except IndexError:
