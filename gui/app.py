@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog
 from datahandler import data
+import webbrowser
 
 class TaskManager:
     def __init__(self):
@@ -29,7 +30,7 @@ class TaskManager:
         self.menu_file.add_command(label="Exit", command=self.on_closing)
 
         self.menu_help = tk.Menu(self.menubar, tearoff=0)
-        self.menu_help.add_command(label="Github page") #TODO
+        self.menu_help.add_command(label="Github page", command=self.open_page)
 
         self.menubar.add_cascade(label="File", menu=self.menu_file)
         self.menubar.add_cascade(label="Help", menu=self.menu_help)
@@ -87,6 +88,10 @@ class TaskManager:
         self.frame.pack(pady=15)
         ttk.Button(self.frame, text="Add", command=self.add_task).grid(row=0, column=0, padx=10)
         ttk.Button(self.frame, text="Cancel", command=self.dialog.destroy).grid(row=0, column=1, padx=10)
+
+    def open_page(self):
+        url = "https://github.com/Bether12/task-manager"
+        webbrowser.open(url)
 
 
     def add_task(self):
