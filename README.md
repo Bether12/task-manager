@@ -77,3 +77,13 @@ git clone https://github.com/Bether12/task-manager.git
 cd task-manager
 python3 main.py
 ```
+
+## Screenshots
+
+**Main window**
+
+![Task Manager - Main Window](screenshots/main_window.png)
+
+**Add Task Dialog**
+
+![Task Manager - Add Task Dialog](screenshots/add_new_task_dialog.png)
