@@ -110,7 +110,6 @@ class TaskManager:
 
     def mark_done(self):
         try:
-            #Selects the selected item id, splits it and access the relevant number part, then subtracts 1 to be compatible with zeroth indexes
             index = self.tree.index(self.tree.selection())
             self.tasks.mark_done(index)
             self.refresh_tree()
